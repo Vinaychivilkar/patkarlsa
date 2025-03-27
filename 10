@@ -1,0 +1,208 @@
+su root or su --
+
+
+viPractical 10
+1) Program that demonstrates the use of if...else with test
+echo Enter any number
+read n 
+if test $n -gt 0
+then
+			echo $n is positive
+else    
+      echo $n is negative
+fi
+
+
+
+2) Program to check existing fileCode:
+echo Enter the file name:
+read fname
+if [ -f $fname ]
+then
+			echo The file exists.
+else
+      echo The File with name $fname does not exists.
+fi
+
+
+
+3) Program for string comparison
+echo Enter the two strings:
+read str1
+read str2
+if [ $str1 = $str2 ]
+thenecho
+			echo Both the strings are identical
+else
+			echo They both are different
+fi
+
+
+
+4) Program to check whether file has a permission to write
+echo Enter the File Name:
+read fname
+if [ -w $fname ]
+then
+			echo Type text to append. To stop press Ctrl+D.
+else    
+      echo The file you entered has no write permission.
+fi
+
+
+
+5) Program to give grades using expr command
+echo "Enter marks for subjects:"
+read s1
+read s2
+read s3
+read s4
+read s5
+total=500
+obtained=$((s1 + s2 + s3 + s4 + s5 ))
+per=$((obtained * 100 / total))
+echo "Percentage: $per%"
+if [ "$per" -lt 35 ];
+then
+			echo "Grade = F"
+fi
+if [ "$per" -gt 35 ]&&[ "$per" -lt 45 ];
+then
+			echo "Grade = D"
+fi
+if [ "$per" -gt 45 ]&&[ "$per" -lt 60 ];
+then
+			echo "Grade = C"
+fi
+if [ "$per" -gt 60 ]&&[ "$per" -lt 75 ];
+then
+			echo "Grade = B"
+fi
+if [ "$per" -gt 75 ];
+then
+			echo "Grade = A"
+fi
+
+
+
+6) Program to check whether the number is +ve or –ve using elif
+echo "Enter the number"
+read a
+if [ $a -lt 0 ];
+then
+			echo $a is negative.
+elif [ $a -gt 0];
+then
+			echo $a is Positive.
+else
+			echo $a is Zero.
+fi
+
+
+
+7) Program to print the day of the week using case.. in
+echo Enter the day number:
+read num
+case $num in
+1)			echo Sunday;;
+2)			echo Monday;;
+3)			echo Tuesday;;
+4)			echo Wednesday;;
+5)			echo Thursday;;
+6)			echo Friday;;
+7)			echo Saturday;;
+*)			echo Please Enter number between 1 to 7;;
+esac
+
+
+
+8) Program to find the pattern using case
+echo Enter the word:
+read str
+case $str in
+[aeiou]*) echo The word begins with a vowels;;
+[0-9]*) echo The word begins with a digit;;
+*[0-9]) echo The word ends with a digi;;
+????) echo The word entered is 4 lettered word;;
+*) echo The word entered is either starts with a constraints or incorrect input;;
+esac
+
+
+
+9) Menu Driven Program
+echo Enter
+echo 1 to see the contents of /etc/passwd
+echo 2 to see list of users
+echo 3 to see present working directory
+echo 4 exit
+echon enter your choice
+read n
+case $n in
+1)			cat /etc/passwd;;
+2)			ls /home;;
+3)			pwd;;
+4)			exit;;
+*)      echo Enter the S menu choice as 1,2,3, or 4;;
+esac
+
+
+
+10) Program to print first n number and their sum: while loop
+i=1
+sum=0
+while [$i -le 10 ]
+do
+				echo $i
+        sum=`expr $sum + $i`
+        i=`expr $i + 1`
+done
+echo The Sum is: $sum
+
+11) Program to print first n numbers and their sum: do..until
+i=1
+sum=0
+until [ $i -gt 10 ]
+do 
+      echo $i
+      sum=`expr $sum = $i`
+      i=`expr $i + 1`
+done
+echo The sum is : $sum
+
+
+12) Program to illustrate the use of For Loop
+
+sum=0
+for i in 1 2 3 4 5 6 7 8 9 10
+do 
+    sum=`expr $sum + $i`
+    echo $i
+echo The sum is : $sum
+
+
+13) Program to print summation 1+2+3+ -----n
+
+
+echo Enter the number:
+read n
+i=1
+sum=0
+while [ $i -lt $n ]
+do 
+      sum=`expr $sum + $i`
+      i=`expr $i + 1`
+done
+echo "summation = $sum"
+
+14) Program to print table
+
+j=1
+echo Input number:
+read n
+echo " print table of $n"
+for i in 1 2 3 4 5 6 7 8 9 10
+do
+      j=`expr $n \* $i`
+      echo "$n x $i = $j"
+      i=`expr $i + 1`
+done
