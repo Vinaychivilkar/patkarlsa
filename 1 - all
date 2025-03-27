@@ -1,0 +1,328 @@
+sum='expr
+PRACT 1
+switch to root server (su root or su -)
+1) Command Line Interface
+man -l
+cd
+man -k time | grep 8
+
+2)Date
+date 05151345
+date 05251400
+
+3)create a directory
+makedir /tempdir
+cp /etc/[abc]* /tempdir
+ls /tempdir
+ls /
+man ls
+ls -t
+ls -t /etc
+find / -size +100M
+system-config-users
+bg
+jobs
+fg
+jobs
+bash
+
+ssh -X localhost
+ps afx
+kill 2758
+kill 2767Killed by signal 15
+dd if=/dev/zero of=/dev/null &
+dd if=/dev/zero of=/dev/null &
+dd if=/dev/zero of=/dev/null &
+dd if=/dev/zero of=/dev/null &
+top
+press k
+2294
+su - rjcit
+crontab -e
+*/5 * * * * mail -s "Hello Root this is Rjcit user." root <
+mail
+/////
+
+PRACT 2 STORAGE DEVICES
+in root server(su - or su root)
+fdisk -l
+fdisk /dev/sda
+m
+n
+p
+1
++20M
+w
+partx -a /dev/sda
+partx -l /dev/sda
+fdisk -l
+mkfs.ext4 /dev/sda4
+mkdir /file1
+cd /
+ls /
+vim /etc/fstab
+press i
+Now, Add a line below the last line: /dev/sda4   /file1 ext4 defaults 0 0
+:wq!
+mount -a
+df
+df -hT
+After removing the line save and exit from vim /etc/fstab.
+umount /dev/sda4
+rmdir /file1
+m
+d
+4
+w
+fdisk /dev/sda
+m
+d
+4
+w
+partx -a /dev/sda
+df -h
+vi file1
+cat fiel1
+ln file1 HardFile
+cat HardFile
+ln -s file1 SoftFile
+cat SoftFile
+fdisk /disk /dev/sda
+m
+n
+e
+p
+n
+t
+5
+8e
+p
+w
+pvcreate /dev/sda5
+pvs
+vgcreate tybscit-A /dev/sda5
+vgs
+lvcreate -n userl -L +2GB tybscit-A
+lvs
+cd /dev/mapper
+ls
+mkfs.ext4 /dev/mapper/tybscit--A-user1
+mkdir /user1
+mount /dev/mapper/tybscit--A-user1 /user1
+df -h
+umount /dev/mapper//tybscit--A-user1
+lvremove /dev/mapper/tybscit--A-user1
+vgremove tybscit-Aa
+pvremove /dev/sda5
+df -h
+cd RHEL_6.0\ x86_64\ Disc\ 1/
+ls
+cd /
+mkdir /RHEL6
+ls
+cd /RHEL6
+cp -vr /media/rhel_6.0\ x86_64\ Disc\ 1/* /RHEL6/
+cd RHEL_6.0\ x86_64\ Disc\ 1/Packages
+rpm -ivh deltarpm-3.5-0.5.20090913git.el6.x86_64.rpm
+rpm -ivh pyhton-deltarpm-3.5-0.5.20090913git.el6.x86_64.rpm
+rpm -ivh createrepo-0.9.8-4.el6.noarch.rpm
+createrepo /myrepo
+cd /etc/yum/pluginconf.d/
+createrepo --database /RHEL6/Packages
+cd /etc/yum.repos.d
+vi rhel.repo
+yum repolist
+yum search nmap
+yum install dhcp
+
+///////
+PRACT 3 Working with RPM Storage and Networking:
+cd RHEL_6.0\ x86_64\ Disc\ 1/Packages
+rpm -qR vlock
+rpm -qpR createrepo-0.9.8-4.el6.noarch.rpm
+rpm -ivh --nodeps createrepo-0.9.8-4.el6.noarch.rpm
+rpm -q vlock
+rpm -ql vlock
+rpm -qa
+rpm -e vlock
+rpm -qi vdftpd
+rpm -ivh --replacepkgs vlock-1.3-31.el6.x86_64.rpm
+ifconfig
+Now, we will graphically change the ipaddress:
+Click on the computer icon, then hover on the “VPN Connections” and click “Configure VPN...”
+Go to Wired tab and click on System eth0 and Edit it:
+Then go to IPv4(IP version 4) Settings: and take the method as “Manual” and add a address manually.
+Click on Add button and write the following details and then click on Apply:
+Address      Netmask         Gateway
+192.168.1.3  255.255.255.0   0.0.0.0
+service network restart
+ifconfig
+ip route show
+ip addr show
+ping 192.168.1.3
+ip addr add dev eth0 192.168.10.10/24
+ip route show
+//////
+
+PRACT 4 Working with Users, Groups, and Permissions
+Graphically Add Users And Groups:
+System ->Administration -> Users and Groups
+Click on Add User
+After Clicking Add Button Type name and password and click on yes
+Add Group:
+Click on Add Group Button
+After adding group name select the group members
+	useradd smith
+  passwd smith
+  vi /etc/sudoers
+  Add this line for smith
+smith ALL=(ALL) ALL
+visudo
+Testthe configuration by making smith to login and perform any administrative activity as
+shown below:
+a)Add user Jackson using sudo:
+su - smith
+sudo useradd Jackson
+b)Changing password of Jackson using sudo:
+sudo passwd Jackson
+2] Temporarily changing identity with the help of su command:
+a)When root changes identity temporarily, with the help of
+su command, the system never asks for password:
+su - Jackson
+su - smith
+3]Administrative commands
+useradd -c "this is vishal's account" -u 601 -o -s /sbin/bash Vishal
+cat /etc/passwd
+change -m 15 -M 25 -E 27/03/2025
+change -l Vishal
+cat /etc/shadow
+passwd -u Vishal
+passwd -l Vishal
+chsh -s /sbin/nologin Vishal
+groupadd friends
+gpasswd -M smith,Jackson,Vishal -A smith friends
+cat /etc/group
+userdel Vishal
+cat /etc/passwd
+groupdel friends
+cat /etc/group
+///////////
+Practical 5: Firewall and Cryptographic services:
+service iptables stop
+service iptables restart
+iptables -L
+iptables -P INPUT ACCEPT
+iptables -P FORWARD ACCEPT
+iptables -P OUTPUT ACCEPT
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+iptables -P OUTPUT DROP
+iptables -A INPUT -j REJECT
+iptables -A FORWARD -j REJECT
+iptables -A OUTPUT -j REJECT
+iptables -L
+[root@server ~]# iptables -A INPUT -p tcp -s 192.168.1.5 --dport ssh -j ACCEPT
+
+[root@server ~]# iptables -A INPUT -i eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISH -j ACCEPT
+
+[root@server ~]# iptables -A INPUT -p tcp -s 192.168.1.5 --dport ssh -j ACCEPT
+
+[root@server ~]# iptables -A OUTPUT -p tcp -d 192.168.1.3 --sport ssh -j ACCEPT
+
+[root@server ~]# iptables -A OUTPUT -o eth0 -p tcp --sport 22 -m state --state NEW,ESTABLISH -j ACCEPT
+
+[root@server ~]# iptables -A INPUT -p icmp --icmp-type echo-request -j DROP
+
+[root@server ~]# iptables -A OUTPUT -p tcp --dport telnet -j DROP
+
+[root@server ~]# iptables -A INPUT -p tcp --dport telnet -j REJECT
+
+[root@server ~]# iptables -A INPUT -i lo -j ACCEPT
+[root@server ~]# iptables -A INPUT -p tcp --dport ssh -j ACCEPT
+[root@server ~]# iptables -A INPUT -j REJECT
+
+[root@server ~]# iptables -A INPUT -i eth0 -s 192.168.0.0/24 -j DROP
+iptables -L
+iptables -F
+iptables -L
+Setting Up Cryptographic Services:
+useradd linda: to add another user called linda.
+passwd linda: to set password for linda.
+useradd lisa(exception case)
+passwd lisa
+gpg --gen -key
+1
+1024
+10
+y
+Enter the passphrase for the key
+If you have written easy password it will popup this dialog box, click on “Take this one anyway”.
+Again type your passphrase here.
+gpg --export -a > /temp/linda.key
+gpg --import -a < /temp/lisa.key
+gpg --list-keys
+Now, login as Lisa:
+gpg --gen -key
+Enter the passphrase for the key
+If you have written easy password it will popup this dialog box, click on “Take this one anyway”.
+Again type your passphrase here.
+gpg --export -a > /tmp/lisa.key
+gpg --import -a < /tmp/linda.key
+gpg --list-keys
+cat > secret1.txt
+add a message in it.(Hii Lisa)
+gpg -e secret1.txt
+cp secret1.txt.gpg /tmp
+[Again login to linda:]
+gpg -d /tmp/secret1.txt.gpg
+Likewise, we will create a secret.txt file to show it in the Linda’s account
+cat > secret.txt 
+(add a message into it as :- 
+Hii Lisa 
+This is Linda here.)
+gpg -e secret.txt
+cp secret.txt.gpg /tmp
+gpg -d /tmp/secret.txt.gpg
+
+//////////////
+
+PRACT 9 Configuring Apache Web Server on Red Hat Enterprise Linux
+in root server (su - or su root)
+ifconfig
+rpm -ivh httpd*
+iii) Install the following 5 packages –
+rpm -qa | grep httpd
+chkconfig httpd on
+service httpd start
+mkdir -p /var/www/virtual/www.localdomain/html/
+vi /var/www/virtual/www.localdomain/html/index.html
+service named start
+dig -x 127.0.0.1
+Open httpd.conf file for configuration of httpd :
+ /etc/httpd/conf/httpd.conf
+service httpd restart
+links 127.0.0.1
+On firefox open a tab & type ‘http://127.0.0.1/index.html’ –
+//////////////
+
+Practical 11: Configuring Booting with GRUB:
+Install the Grub package from packages folder by searching “grub”.
+in root swerver(su - or su root)
+vi /boot/grub/grub.conf
+Copy the last 6 lines from title Red Hat Enterprise Linux and paste it below
+and make some changes in it.
+title My Client Machine (RHEL6)
+    root (hd0,0)
+    kernel /vmlinuz-2.6.32-71.el6.x86_64 ro root=UUID=b2192fb5-78e2-4132-93a9-c71c6189698a rd_NO_LUKS rd_NO_LVM rd_NO_MD rd_NO_DM LANG=en_US.UTF-8 SYSFONT=latarcyrheb-sun16 KEYBOARDTYPE=pc KEYTABLE=us crashkernel=auto rhgb quiet
+    initrd /initramfs-2.6.32-71.el6.x86_64.img
+ Also change the timeout service.
+ Increase it by 30.
+ init 6 
+ After restarting we can see there is a 30 seconds timeout shown at last of the 2nd sentence.
+ By pressing any key it will ask about which environment do we want to run.
+As we can see both the grub entries are shown below
+By up and down arrow we can select the environment which we want to run.
+By pressing enter on our new environment which we have created by name “My Client Machine.”
+
+It will open the same environment as of the Red Hat Enterprise Linux, it means the environment it
+working correctly.
